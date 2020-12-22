@@ -1,0 +1,34 @@
+aws rekognition describe-collection --collection-id smartdoor-visitors --region us-east-1
+{
+    "FaceCount": 1,
+    "FaceModelVersion": "5.0",
+    "CollectionARN": "arn:aws:rekognition:us-east-1:006767371987:collection/smartdoor-visitors",
+    "CreationTimestamp": "2020-12-12T06:39:23.152000-05:00"
+}
+
+aws rekognition index-faces --collection-id smartdoor-visitors --image "{\"S3Object\":{\"Bucket\":\"smartdoor-visitor-photos\",\"Name\":\"70.jpg\"}}" --external-image-id test1 --region us-east-1
+
+
+aws rekognition create-stream-processor --input "{\"KinesisVideoStream\":{\"Arn\":\"arn:aws:kinesisvideo:us-east-1:006767371987:stream/KVS1/1605531603642\"}}" 
+--name KVS1 --role-arn arn:aws:iam::006767371987:role/RekognitionRole 
+--stream-processor-output "{\"KinesisDataStream\":{\"Arn\":\"arn:aws:kinesis:us-east-1:006767371987:stream/KDS1\"}}" -
+-settings "{\"FaceSearch\":{\"CollectionId\":\"smartdoor-visitors\", \"FaceMatchThreshold\": 85.5}}" --region us-east-1
+
+aws rekognition start-stream-processor --name KVS1 --region us-east-1
+
+aws rekognition stop-stream-processor --name KVS1 --region us-east-1
+
+aws kinesis register-stream-consumer --consumer-name Assignment2_LF1 --stream-arn arn:aws:kinesis:us-east-1:006767371987:stream/KDS1 --region us-east-1
+
+aws kinesis get-shard-iterator --shard-id shardId-000000000000 --shard-iterator-type TRIM_HORIZON --stream-name KDS1 --region us-east-1
+
+aws kinesis get-records --shard-iterator AAAAAAAAAAGIHXrgq68v8iAutW9Y01bTnOyJ497lNAogwDz0gSITwRlwRFqKXM1fTaONR8l6drCCy8ArgbtPQhh98ugmpfM1jYoOiQw8PY0Lj6PBi5eZ/PKLvPzAY7Zo7MVlcN8OkLZIhug2ayavqk1wFWFEf01Z0vgrWe5jUFXF3He7Q9JiWdVlc94WuiTtb+O9m8c1NIMBZwdx9NmXYWEEyIMzFFYh --region us-east-1
+
+aws rekognition search-faces-by-image --collection-id smartdoor-visitors --image-bytes fileb://3.jpg
+
+aws kinesisvideo get-data-endpoint --stream-name KVS1 --api-name GET_MEDIA_FOR_FRAGMENT_LIST
+{
+    "DataEndpoint": "https://b-0433bf65.kinesisvideo.us-east-1.amazonaws.com"
+}
+
+aws kinesis-video-archived-media get-media-for-fragment-list --stream-name KVS1 --fragments='["91343852333181512135827633234885364778705130140"]' outfile.mkv --endpoint-url https://b-0433bf65.kinesisvideo.us-east-1.amazonaws.com
