@@ -1,6 +1,4 @@
 # Smart-Door-Authentication-System
-##### [Link To Web Application Known Visitor](http://smartdoorauthentication.s3-website-us-east-1.amazonaws.com/)
-##### [Link To Web Application UnKnown Visitor](http://smartdoorauthentication.s3-website-us-east-1.amazonaws.com/VisitorInfo.html)
 
 
 ## FRONTEND (HTML, JavaScript, CSS)
@@ -15,19 +13,5 @@ This is a door authentication system that will scan a person at the door using A
 ## ARCHITECHTURE :- 
 ![alt text](https://github.com/maheshg23/Smart-Door-Authentication-System/blob/master/images/Architecture.png)
 
-
-## SAMPLE UI OF THE WEB APPLICATION
-![alt text](https://github.com/maheshg23/Smart-Door-Authentication-System/blob/master/images/ApplicationUI.jpg)
-
-
-## SAMPLE OUTPUT 
-### Known Visitor 
-The person at the door recieves an SMS of the OTP which is valid only for 5 minutes :-  
-![alt text](https://github.com/maheshg23/Smart-Door-Authentication-System/blob/master/images/KnownVisitor.jpeg)
-
-### Unknown Visitor
-The Owner recieves an Email with the persons image and a link to add the Unknown vistitor to the database :-   
-![alt text](https://github.com/maheshg23/Smart-Door-Authentication-System/blob/master/images/UnknownVisitor.png)
- 
 
 
